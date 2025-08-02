@@ -1,9 +1,14 @@
-package com.cadastrosimples.CadastroSimples;
+package com.cadastrosimples.CadastroSimples.Usuarios;
+
+import java.util.List;
+
+import com.cadastrosimples.CadastroSimples.Contatos.ContatoModel;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,12 +18,13 @@ public class UsuarioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private String email;
     private int idade;
+    @OneToMany(mappedBy = "usuario")
+    private List<ContatoModel> contatos;
+
     public UsuarioModel() {
     }
-    public UsuarioModel(String email, int idade, String nome) {
-        this.email = email;
+    public UsuarioModel(int idade, String nome) {
         this.idade = idade;
         this.nome = nome;
     }
@@ -29,14 +35,6 @@ public class UsuarioModel {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public int getIdade() {
