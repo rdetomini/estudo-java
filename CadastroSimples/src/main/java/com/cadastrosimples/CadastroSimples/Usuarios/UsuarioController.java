@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -43,12 +44,12 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UsuarioModel Cadastrar(@RequestBody UsuarioModel usuarioModel) {
+    public UsuarioModel Cadastrar(@Valid @RequestBody UsuarioModel usuarioModel) {
         return usuarioRepository.save(usuarioModel);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioModel> Atualizar(@PathVariable long id, @RequestBody UsuarioModel usuarioModel) {
+    public ResponseEntity<UsuarioModel> Atualizar(@Valid @PathVariable long id, @RequestBody UsuarioModel usuarioModel) {
         if (!usuarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
