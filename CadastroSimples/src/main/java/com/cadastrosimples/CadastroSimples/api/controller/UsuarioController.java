@@ -1,4 +1,4 @@
-package com.cadastrosimples.CadastroSimples.Usuarios;
+package com.cadastrosimples.CadastroSimples.api.controller;
 
 import java.util.List;
 
@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cadastrosimples.CadastroSimples.domain.model.UsuarioModel;
+import com.cadastrosimples.CadastroSimples.domain.repository.UsuarioRepository;
+import com.cadastrosimples.CadastroSimples.domain.service.UsuarioService;
+
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
@@ -23,7 +27,8 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private final IUsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
+    private final UsuarioRepository usuarioRepository;
 
     @GetMapping
     public List<UsuarioModel> List() {
@@ -45,7 +50,7 @@ public class UsuarioController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UsuarioModel Cadastrar(@Valid @RequestBody UsuarioModel usuarioModel) {
-        return usuarioRepository.save(usuarioModel);
+        return usuarioService.salvar(usuarioModel);
     }
 
     @PutMapping("/{id}")
@@ -55,18 +60,18 @@ public class UsuarioController {
         }
 
         usuarioModel.setId(id);
-        UsuarioModel usuarioAtualizado = usuarioRepository.save(usuarioModel);
+        UsuarioModel usuarioAtualizado = usuarioService.salvar(usuarioModel);
 
         return ResponseEntity.ok(usuarioAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> Excluir(@PathVariable long id) {
+    public ResponseEntity<Void> Excluir(@PathVariable Long id) {
         if (!usuarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
-        usuarioRepository.deleteById(id);
+        usuarioService.excluir(id);
 
         return ResponseEntity.noContent().build();
     }

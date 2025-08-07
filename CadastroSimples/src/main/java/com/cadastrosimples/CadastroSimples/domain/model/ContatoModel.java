@@ -1,6 +1,4 @@
-package com.cadastrosimples.CadastroSimples.Contatos;
-
-import com.cadastrosimples.CadastroSimples.Usuarios.UsuarioModel;
+package com.cadastrosimples.CadastroSimples.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

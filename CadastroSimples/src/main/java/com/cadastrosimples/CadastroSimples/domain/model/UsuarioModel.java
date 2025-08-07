@@ -1,4 +1,4 @@
-package com.cadastrosimples.CadastroSimples.Usuarios;
+package com.cadastrosimples.CadastroSimples.domain.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
