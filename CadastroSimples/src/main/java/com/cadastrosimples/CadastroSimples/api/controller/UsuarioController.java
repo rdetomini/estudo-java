@@ -49,12 +49,12 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UsuarioModel Cadastrar(@Valid @RequestBody UsuarioModel usuarioModel) {
+    public UsuarioModel cadastrar(@Valid @RequestBody UsuarioModel usuarioModel) {
         return usuarioService.salvar(usuarioModel);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioModel> Atualizar(@Valid @PathVariable long id, @RequestBody UsuarioModel usuarioModel) {
+    public ResponseEntity<UsuarioModel> atualizar(@Valid @PathVariable long id, @RequestBody UsuarioModel usuarioModel) {
         if (!usuarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
@@ -66,7 +66,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> Excluir(@PathVariable Long id) {
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
         if (!usuarioRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
