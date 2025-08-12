@@ -26,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class ContatoModel {
+public class Contato {
     @Id
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -38,8 +38,8 @@ public class ContatoModel {
     @Size(max=11)
     private String celular;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "usuarioId")
-    @JsonBackReference
-    private UsuarioModel usuario;
+    private Usuario usuario;
 }

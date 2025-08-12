@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cadastrosimples.CadastroSimples.domain.model.ContatoModel;
+import com.cadastrosimples.CadastroSimples.domain.model.Contato;
 import com.cadastrosimples.CadastroSimples.domain.repository.ContatoRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -18,15 +18,15 @@ public class ContatoService {
     private final ContatoRepository contatoRepository;
 
     @Transactional
-    public ContatoModel create(ContatoModel contatoModel) {
-        return contatoRepository.save(contatoModel);
+    public Contato create(Contato contato) {
+        return contatoRepository.save(contato);
     }
 
-    public List<ContatoModel> listAll() {
+    public List<Contato> listAll() {
         return contatoRepository.findAll();
     }
 
-    public Optional<ContatoModel> getById(long id) {
+    public Optional<Contato> getById(long id) {
         return contatoRepository.findById(id);
     }
 }

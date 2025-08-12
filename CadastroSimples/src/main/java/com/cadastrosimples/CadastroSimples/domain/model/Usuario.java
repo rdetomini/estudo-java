@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class UsuarioModel {
+public class Usuario {
 
     @Id
     @EqualsAndHashCode.Include
@@ -41,6 +41,6 @@ public class UsuarioModel {
     private int idade;
 
     @OneToMany(mappedBy = "usuario")
-    private List<ContatoModel> contatos;
+    private List<Contato> contatos;
 
 }

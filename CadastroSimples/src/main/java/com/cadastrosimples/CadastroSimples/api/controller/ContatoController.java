@@ -14,26 +14,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cadastrosimples.CadastroSimples.domain.model.ContatoModel;
+import com.cadastrosimples.CadastroSimples.domain.model.Contato;
 import com.cadastrosimples.CadastroSimples.domain.service.ContatoService;
 
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/contato")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class ContatoController {
 
     private final ContatoService contatoService;
 
     @GetMapping
-    public List<ContatoModel> listAll() {
+    public List<Contato> listAll() {
         return contatoService.listAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContatoModel> getById(@PathVariable long id) {
+    public ResponseEntity<Contato> getById(@PathVariable long id) {
         return contatoService.getById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -41,14 +42,14 @@ public class ContatoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ContatoModel create(@Valid @RequestBody ContatoModel contatoModel) {
-        return contatoService.create(contatoModel);
+    public Contato create(@Valid @RequestBody Contato contato) {
+        return contatoService.create(contato);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ContatoModel> update(@PathVariable long id, @RequestBody ContatoModel contatoModel) {
-        contatoModel.setId(id);
-        var contatoUpdated = contatoService.create(contatoModel);
+    public ResponseEntity<Contato> update(@PathVariable long id, @RequestBody Contato contato) {
+        contato.setId(id);
+        var contatoUpdated = contatoService.create(contato);
 
         return ResponseEntity.ok(contatoUpdated);
     }
